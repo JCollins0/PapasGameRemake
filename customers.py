@@ -88,8 +88,8 @@ class Customer(GameObject,Dragable):
         return self.id
 
 class CustomerOrderLine(GameObject):
-    def __init__(self,x,y,width=800,height=150):
-        super().__init__("CustomerOrderLine",x=x,y=y,width=width,height=height,color=colors.white)
+    def __init__(self,x,y,width=800,height=150,image=None):
+        super().__init__("CustomerOrderLine",image=image,x=x,y=y,width=width,height=height,color=colors.white)
         self.customers = list()
 
     def update(self):
@@ -113,9 +113,10 @@ class CustomerOrderLine(GameObject):
             return self.customers.pop(0)
 
     def draw(self):
-        super().draw()
         for customer in self.customers:
             customer.draw()
+        super().draw()
+
 
     def has_waiting_customer(self):
         if len(self.customers) > 0:
@@ -124,11 +125,11 @@ class CustomerOrderLine(GameObject):
 
 class CustomerPreTakeOrderLine(CustomerOrderLine):
     def __init__(self,x,y):
-        super().__init__(x=x,y=y,width=550)
+        super().__init__(x=x,y=y,image=utils.load_image("prewait_line"))
 
 class CustomerPostTakeOrderLine(CustomerOrderLine):
     def __init__(self,x,y):
-        super().__init__(x=x,y=y,width=450)
+        super().__init__(x=x,y=y,width=450,image=utils.load_image("postwait_line"))
 
     def add_customer(self, customer):
         if super().add_customer(customer):

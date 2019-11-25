@@ -5,6 +5,7 @@ class Constants:
         self.SCREEN_WIDTH = 1000
         self.FONT_SIZE = 32
         self.FONT_SIZE_SMALL = 16
+        self.TEXT_CENTERED = 0x1
 
         # Order Constants
         self.CRITERIA_IMAGE_WIDTH = 210
@@ -46,8 +47,8 @@ class Constants:
 
         #Topping Constants
         self.TOPPING_SIZE = 25
-        self.TOPPING_BIN_WIDTH = 125
-        self.TOPPING_BIN_HEIGHT = 100
+        self.TOPPING_BIN_WIDTH = 63
+        self.TOPPING_BIN_HEIGHT = 50
         self.CHOCOLATE_TOPPING="chocolatechip"
         self.CHERRY_TOPPING="cherry"
         self.RAZZBERRY_TOPPING="razzberry"

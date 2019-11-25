@@ -35,14 +35,14 @@ WAFFLE_EDITOR = WaffleEditor(175,200)
 
 
 TOPPING_BINS = list()
-TOPPING_BINS.append(ToppingBin(25,175,constants.CHOCOLATE_TOPPING))
-TOPPING_BINS.append(ToppingBin(25,290,constants.CHERRY_TOPPING))
-TOPPING_BINS.append(ToppingBin(25,405,constants.RAZZBERRY_TOPPING))
-TOPPING_BINS.append(ToppingBin(25,520,constants.STRAWBERRY_TOPPING))
 TOPPING_BINS.append(ToppingBin(600,175,constants.BANANA_TOPPING))
-TOPPING_BINS.append(ToppingBin(600,290,constants.PEPPERMINT_TOPPING))
-TOPPING_BINS.append(ToppingBin(600,405,constants.BUTTER_TOPPING))
-TOPPING_BINS.append(ToppingBin(600,520,constants.BACON_TOPPING))
+TOPPING_BINS.append(ToppingBin(600,230,constants.PEPPERMINT_TOPPING))
+TOPPING_BINS.append(ToppingBin(600,285,constants.BUTTER_TOPPING))
+TOPPING_BINS.append(ToppingBin(600,340,constants.BACON_TOPPING))
+TOPPING_BINS.append(ToppingBin(600,395,constants.CHOCOLATE_TOPPING))
+TOPPING_BINS.append(ToppingBin(600,450,constants.CHERRY_TOPPING))
+TOPPING_BINS.append(ToppingBin(600,505,constants.RAZZBERRY_TOPPING))
+TOPPING_BINS.append(ToppingBin(600,560,constants.STRAWBERRY_TOPPING))
 
 screen = None
 def init_states(screen_ref):
@@ -195,9 +195,16 @@ class GameState(State):
 
 
             elif isinstance(obj, OrderTicket):
-                if obj.intersects(ORDERRECEPTACLE) and ORDERRECEPTACLE.contains(mouse_x, mouse_y) and not ORDERRECEPTACLE.has_ticket():
-                    ORDERRECEPTACLE.set_order_ticket(obj)
-                    self.remove_game_object(obj)
+                if obj.intersects(ORDERRECEPTACLE) and ORDERRECEPTACLE.contains(mouse_x, mouse_y):
+                    if not ORDERRECEPTACLE.has_ticket():
+                        ORDERRECEPTACLE.set_order_ticket(obj)
+                        self.remove_game_object(obj)
+                    else:
+
+                        ticket = ORDERRECEPTACLE.remove_order_ticket()
+                        ORDERRECEPTACLE.set_order_ticket(obj)
+                        self.remove_game_object(obj)
+                        ORDERLINE.add_ticket(ticket)
                 else: # snap back, TODO maybe combine above clause
                     ORDERLINE.add_ticket(obj)
                     self.remove_game_object(obj)
@@ -214,8 +221,8 @@ class OrderState(GameState):
         customer2 = Customer(objectids.CUSTOMER,700,400)
         customer3 = Customer(objectids.CUSTOMER,800,400)
 
-        self.add_game_object(PRETAKEORDERLINE)
-        self.add_game_object(POSTTAKEORDERLINE)
+        self.add_game_object(PRETAKEORDERLINE,priority=1)
+        self.add_game_object(POSTTAKEORDERLINE,priority=1)
         PRETAKEORDERLINE.add_customer(customer)
         PRETAKEORDERLINE.add_customer(customer2)
         PRETAKEORDERLINE.add_customer(customer3)

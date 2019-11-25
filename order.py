@@ -80,10 +80,18 @@ class WaitCriteria(Criteria):
         if time <= self.max_wait_time:
             return 100
         else:
-            return 100-.5*( (time-self.max_wait_time)**2 / self.max_wait_time )
+            return max(0,100-.5*( (time-self.max_wait_time)**2 / self.max_wait_time ))
 
     def __str__(self):
         return self.max_wait_time
+
+class SideCriteria(Criteria):
+    def __init__(self):
+        pass
+
+    def eval(self,metadata): return 0
+    def draw(self,x,y,width_scale,height_scale,parent_width,parent_height):
+        pass 
 
 class CookCriteria(Criteria):
     def __init__(self, type, cook_time):
@@ -290,7 +298,6 @@ class OrderLine(GameObject):
         for t in self.tickets:
             for r in self.tickets:
                 if r.x == furthest_x:
-                    print
                     furthest_x -= 55
 
         snapto_x = min(furthest_x, ticket.x)
@@ -314,7 +321,7 @@ class OrderLine(GameObject):
 
 class OrderReceptacle(GameObject):
     def __init__(self):
-        super().__init__(objectids.ORDERRECEPTACLE,x=constants.SCREEN_WIDTH-250,y=0,width=250,height=500,color=colors.red)
+        super().__init__(objectids.ORDERRECEPTACLE,image=utils.load_image("ticket_holder"),x=constants.SCREEN_WIDTH-250,y=0,width=250,height=500,color=colors.red)
         self.order_ticket = None
 
     def set_order_ticket(self, ticket):
@@ -338,7 +345,7 @@ class OrderReceptacle(GameObject):
 
 class OrderTicket(GameObject, Dragable):
     def __init__(self,name,x,y,customerID,recipe):
-        super().__init__(name,x=x,y=y,width=50,height=100,color=colors.blue)
+        super().__init__(name,image=utils.load_image("ticket"),x=x,y=y,width=50,height=100,color=colors.blue)
         self.small_width = self.width
         self.small_height = self.height
         self.customerID = customerID
@@ -355,8 +362,8 @@ class OrderTicket(GameObject, Dragable):
         self.move_to(x=x,y=y)
 
     def draw(self):
-        super().draw()
-        utils.draw_big_text_scaled(str(self.customerID),self.x, self.y,self.width/250,self.height/500 )
+        super().draw_scaled()
+        utils.draw_big_text_scaled(str(self.customerID),int(self.x+self.width//2-utils.get_big_font_size(str(self.customerID))[0]/2*self.width/250), self.y,self.width/250,self.height/500)
         if self.recipe is not None:
             for i,criterion in enumerate(self.recipe.criterion,1):
                 criterion.draw(self.x+(self.width-constants.CRITERIA_IMAGE_WIDTH*self.width/250)//2,self.y+self.height-i*(constants.CRITERIA_IMAGE_HEIGHT*self.height/500+20*self.height/500),self.width/250, self.height/500,self.width,self.height)

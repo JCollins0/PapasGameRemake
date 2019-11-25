@@ -17,6 +17,8 @@ class GameObject:
         self.image_state = 0
         self.x = x
         self.y = y
+        self.orig_width = width
+        self.orig_height = height
         self.width= width
         self.height = height
         self.color = color
@@ -83,6 +85,13 @@ class GameObject:
         if self.should_render:
             if self.images is not None:
                 utils.draw_image(self.images[self.image_state],self.x,self.y)
+            else:
+                utils.draw_rect(self.color, self.x,self.y,self.width,self.height)
+
+    def draw_scaled(self):
+        if self.should_render:
+            if self.images is not None:
+                utils.draw_image_scaled(self.images[self.image_state],self.x,self.y,self.orig_width,self.orig_height,self.width,self.height)
             else:
                 utils.draw_rect(self.color, self.x,self.y,self.width,self.height)
 

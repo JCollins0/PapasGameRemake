@@ -10,7 +10,6 @@ class Recipe:
         self.criterion.append(criteria)
 
 
-
 class FrozenWaffle(Recipe):
     def __init__(self, name,batter):
         super().__init__(name)
@@ -75,9 +74,8 @@ class BerryLoverWaffle(FullCookedWaffle):
 
 class ChocoBananaWaffle(FullCookedWaffle):
     def __init__(self):
-        super().__init__("BerryLoverWaffle",constants.CHERRY_BATTER)
+        super().__init__("ChocoBananaWaffle",constants.CHOCOLATE_BATTER)
         self.add_criteria(ToppingCriteria(4, constants.CHOCOLATE_TOPPING, constants.OUTER,sided=True,side=constants.RIGHT))
         self.add_criteria(ToppingCriteria(4, constants.BANANA_TOPPING, constants.OUTER,sided=True,side=constants.LEFT))
         self.add_criteria(ToppingCriteria(4, constants.CHOCOLATE_TOPPING, constants.MIDDLE,sided=True,side=constants.RIGHT))
         self.add_criteria(ToppingCriteria(4, constants.BANANA_TOPPING, constants.MIDDLE,sided=True,side=constants.LEFT))
-        self.add_criteria(ToppingCriteria(1, constants.BUTTER_TOPPING, constants.CENTER))

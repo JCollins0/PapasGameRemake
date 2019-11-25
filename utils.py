@@ -69,7 +69,7 @@ def draw_image_scaled(image, x,y, width,height, s_width, s_height):
     rect = pygame.Rect(x, y, width, height)
     surface = pygame.Surface(rect.size,flags=0x00010000).convert_alpha()
     surface.blit(image,(0,0))
-    surface = pygame.transform.scale(surface, (s_width,s_height))
+    surface = pygame.transform.scale(surface, (int(s_width),int(s_height)))
     screen.blit(surface, (x,y))
 
 def get_font_size(text):
@@ -77,6 +77,9 @@ def get_font_size(text):
 
 def get_small_font_size(text):
     return small_font.size(text)
+
+def get_big_font_size(text):
+    return big_font.size(text)
 
 def draw_text(text, x,y,color=colors.black):
     textsurface = font.render(text, True, color)
