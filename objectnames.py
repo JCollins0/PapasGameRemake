@@ -1,9 +1,10 @@
 class ObjectIds:
     def __init__(self):
-        self.STARTGAME = "STARTGAME"
-        self.ORDERBUTTON = "ORDER"
-        self.COOKBUTTON = "COOK"
-        self.BUILDBUTTON = "BUILD"
+        self.STARTGAME = "Start Game"
+        self.ORDERBUTTON = "Order"
+        self.COOKBUTTON = "Cook"
+        self.BUILDBUTTON = "Build"
+        self.SIDESBUTTON = "Sides"
         self.TAKEORDERBUTTON = "Take Order"
         self.SUBMITORDERBUTTON = "Submit Order"
         self.TOSSWAFFLEBUTTON = "Toss Waffle"

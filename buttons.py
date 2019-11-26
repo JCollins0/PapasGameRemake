@@ -31,6 +31,11 @@ class BuildButton(Button):
     def __init__(self,x,y,width,height):
         super().__init__(objectids.BUILDBUTTON,x=x,y=y,width=width,height=height,color=colors.red)
 
+class SidesButton(Button):
+    def __init__(self,x,y,width,height):
+        super().__init__(objectids.SIDESBUTTON,x=x,y=y,width=width,height=height,color=colors.red)
+
+
 class TakeOrderButton(Button):
     def __init__(self,x,y,width,height):
         super().__init__(objectids.TAKEORDERBUTTON,x=x,y=y,width=width,height=height,color=colors.red)

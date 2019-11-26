@@ -1,7 +1,8 @@
 import pygame
 import numpy as np
 import utils
-from buttons import Button, StartGameButton, OrderButton, CookButton, BuildButton,TakeOrderButton, SubmitOrderButton, TossWaffleButton,JudgeOkButton
+from buttons import Button, StartGameButton, OrderButton, CookButton, BuildButton, SidesButton
+from buttons import TakeOrderButton, SubmitOrderButton, TossWaffleButton,JudgeOkButton
 from objectnames import ObjectIds
 from customers import Customer,CustomerPreTakeOrderLine,CustomerPostTakeOrderLine
 from order import OrderTicket,OrderLine,OrderReceptacle
@@ -16,9 +17,10 @@ objectids = ObjectIds()
 
 menu_image = utils.load_image("menu.jpg")[0]
 
-ORDERBUTTON = OrderButton(100,650,100,50)
+ORDERBUTTON = OrderButton(175,650,100,50)
 COOKBUTTON = CookButton(300,650,100,50)
-BUILDBUTTON = BuildButton(500,650,100,50)
+SIDESBUTTON = SidesButton(425,650,100,50)
+BUILDBUTTON = BuildButton(550,650,100,50)
 TAKEORDERBUTTON = TakeOrderButton(775,550,200,50)
 SUBMITORDERBUTTON = SubmitOrderButton(775,550,200,50)
 TOSSWAFFLEBUTTON = TossWaffleButton(775,650,200,50)
@@ -56,6 +58,7 @@ def get_menu_state():
 def update_states():
     ORDERSTATE.update()
     COOKSTATE.update()
+    SIDESSTATE.update()
     BUILDSTATE.update()
 
 class State:
@@ -130,6 +133,7 @@ class GameState(State):
         super().__init__(name)
         self.add_game_object(ORDERBUTTON)
         self.add_game_object(COOKBUTTON)
+        self.add_game_object(SIDESBUTTON)
         self.add_game_object(BUILDBUTTON)
         self.add_game_object(ORDERLINE)
         self.add_game_object(ORDERRECEPTACLE)
@@ -181,6 +185,8 @@ class GameState(State):
                 next_state, obj =  ORDERSTATE, None
             elif isinstance(obj, CookButton):
                 next_state, obj = COOKSTATE, None
+            elif isinstance(obj, SidesButton):
+                next_state, obj = SIDESSTATE, None
             elif isinstance(obj, BuildButton):
                 next_state, obj = BUILDSTATE, None
 
@@ -270,6 +276,20 @@ class CookState(GameState):
 
         return next_state, obj
 
+class SidesState(GameState):
+    def __init__(self):
+        super().__init__("SidesState")
+
+    def draw(self):
+        super().draw()
+
+    def interact_mouse_down(self,state, mouse_x, mouse_y):
+        next_state , obj = super().interact_mouse_down(state, mouse_x,mouse_y)
+        if obj is not None:
+            pass
+            # if isinstance(obj, WaffleMaker):
+        return next_state, obj
+
 class BuildState(GameState):
     def __init__(self):
         super().__init__("BuildState")
@@ -356,5 +376,6 @@ class JudgeState(State):
 MENUSTATE = MenuState()
 ORDERSTATE = OrderState()
 COOKSTATE = CookState()
+SIDESSTATE = SidesState()
 BUILDSTATE = BuildState()
 JUDGESTATE = JudgeState()
