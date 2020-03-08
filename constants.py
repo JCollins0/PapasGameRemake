@@ -46,7 +46,7 @@ class Constants:
         self.DUMP_BATTER = "dumpbatter"
 
         #Topping Constants
-        self.TOPPING_SIZE = 25
+        self.TOPPING_SIZE = 50
         self.TOPPING_BIN_WIDTH = 63
         self.TOPPING_BIN_HEIGHT = 50
         self.CHOCOLATE_TOPPING="chocolatechip"

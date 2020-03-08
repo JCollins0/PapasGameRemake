@@ -38,7 +38,7 @@ class StrawBerryWaffle(MediumCookedWaffle):
     def __init__(self):
         super().__init__("StrawBerryWaffle",constants.BUTTER_BATTER)
         self.add_criteria(ToppingCriteria(8, constants.STRAWBERRY_TOPPING, constants.OUTER))
-        self.add_criteria(ToppingCriteria(8, constants.STRAWBERRY_TOPPING, constants.MIDDLE))
+        self.add_criteria(ToppingCriteria(4, constants.STRAWBERRY_TOPPING, constants.MIDDLE))
         self.add_criteria(ToppingCriteria(4, constants.STRAWBERRY_TOPPING, constants.CENTER))
         self.add_criteria(ToppingCriteria(1, constants.BUTTER_TOPPING, constants.CENTER))
 
@@ -57,9 +57,9 @@ class CrispyPumpkin(BurntWaffle):
 class ButterLover(FrozenWaffle):
     def __init__(self):
         super().__init__("ButterLoverWaffle",constants.BUTTER_BATTER)
-        self.add_criteria(ToppingCriteria(16, constants.BUTTER_TOPPING, constants.OUTER))
-        self.add_criteria(ToppingCriteria(8, constants.BUTTER_TOPPING, constants.MIDDLE))
-        self.add_criteria(ToppingCriteria(4, constants.BUTTER_TOPPING, constants.CENTER))
+        self.add_criteria(ToppingCriteria(8, constants.BUTTER_TOPPING, constants.OUTER))
+        self.add_criteria(ToppingCriteria(4, constants.BUTTER_TOPPING, constants.MIDDLE))
+        self.add_criteria(ToppingCriteria(1, constants.BUTTER_TOPPING, constants.CENTER))
 
 class PlainJane(FullCookedWaffle):
     def __init__(self):

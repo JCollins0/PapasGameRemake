@@ -91,7 +91,7 @@ class SideCriteria(Criteria):
 
     def eval(self,metadata): return 0
     def draw(self,x,y,width_scale,height_scale,parent_width,parent_height):
-        pass 
+        pass
 
 class CookCriteria(Criteria):
     def __init__(self, type, cook_time):
@@ -131,7 +131,7 @@ class ToppingCriteria(Criteria):
         utils.draw_image_scaled(ring_image,x,y,ring_image_width,ring_image_height,int(ring_image_width*width_scale*scale),int(ring_image_height*height_scale*scale))
         utils.draw_big_text_scaled(str(self.amount),int(x + 1.5 * ring_image_width*width_scale*scale),y,parent_width/250,parent_height/500 )
         image_width, image_height = image.get_width(), image.get_height()
-        utils.draw_image_scaled(image,x+3*image_width*width_scale*scale,y,image_width,image_height,int(image_width*width_scale*scale),int(image_height*height_scale*scale))
+        utils.draw_image_scaled(image,x+3*image_width*width_scale,y,image_width,image_height,int(image_width*width_scale),int(image_height*height_scale))
 
     def eval(self, metadata):
         penalty = 0
